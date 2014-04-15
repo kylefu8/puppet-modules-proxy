@@ -1,4 +1,4 @@
 puppet-modules-proxy
 ====================
 
-proxy muchle
+proxy module
