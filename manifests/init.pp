@@ -41,9 +41,9 @@ class proxy (
   }
   
   case $::osfamily {
-    'RedHat': {
+    'RedHat', 'Debian': {
        $proxy_path = '/etc/profile.d/proxy.sh'
-       $template   = 'proxy/rhel.erb'
+       $template   = 'proxy/common.erb'
    }
     'SuSe': {
        $proxy_path = '/etc/sysconfig/proxy'
