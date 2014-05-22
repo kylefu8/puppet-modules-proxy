@@ -1,18 +1,24 @@
 # == Class: proxy
 class proxy (
-  $server       = '',
-  $port         = '',
-  $https_server = 'USE_DEFAULTS',
-  $https_port   = 'USE_DEFAULTS',
-  $ftp_server   = 'USE_DEFAULTS',
-  $ftp_port     = 'USE_DEFAULTS',
+  $server        = '',
+  $port          = '',
+  $https_server  = 'USE_DEFAULTS',
+  $https_port    = 'USE_DEFAULTS',
+  $ftp_server    = 'USE_DEFAULTS',
+  $ftp_port      = 'USE_DEFAULTS',
   $gopher_server = 'USE_DEFAULTS',
-  $gopher_port  =  'USE_DEFAULTS',
-  $no_proxy     = 'USE_DEFAULTS',
-  $proxy_owner  = 'root',
-  $proxy_group  = 'root',
-  $proxy_mode   = '644',
+  $gopher_port   = 'USE_DEFAULTS',
+  $no_proxy      = 'USE_DEFAULTS',
+  $proxy_owner   = 'root',
+  $proxy_group   = 'root',
+  $proxy_mode    = '644',
 ){
+
+  validate_array($no_proxy)
+  if empty($server) == true { fail ("server is must") }
+  if empty($port) == true { fail ("port is must") }
+  if is_integer($port) == false { fail( "port must be integers") }
+
   if $https_server == 'USE_DEFAULTS' {
     $https_server_real = $server
   } else {
@@ -58,11 +64,21 @@ class proxy (
        } else {
          $gopher_port_real = $gopher_port
        }
+       validate_re($gopher_server_real, '^http', 'The format has to start with http://')
     }
     default: {
       fail("Your $(::osfamily) currently is not supported")
     }
    }
+
+  #validating variables
+  validate_re($server, '^http', 'The format has to start with http://')
+  validate_re($https_server_real, '^http', 'The format has to start with http://')
+  validate_re($ftp_server_real, '^http', 'The format has to start with http://')
+
+
+
+  #create proxy file
   file { 'proxy_file':
     ensure   => file,
     content  => template($template),
