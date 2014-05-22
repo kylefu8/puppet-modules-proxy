@@ -46,7 +46,7 @@ class proxy (
        $template   = 'proxy/rhel.erb'
    }
     'SuSe': {
-       $proxy_path = '/etc/sysconfigy/proxy'
+       $proxy_path = '/etc/sysconfig/proxy'
        $template   = 'proxy/suse.erb'
        if $gopher_server == 'USE_DEFAULTS' {
          $gopher_server_real = $server
