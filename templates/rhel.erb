@@ -1,4 +1,6 @@
 #This is managed by Puppet
 #Please do not modify here
 export http_proxy=<%= server %>:<%= port %>
-export https_proxy=<%= server %>:<%= port %>
+export https_proxy=<%= https_server_real %>:<%= https_port_real %>
+export ftp_proxy=<%= ftp_server_real %>:<%= ftp_port_real %>
+export no_proxy="<%= no_proxy_real %>"

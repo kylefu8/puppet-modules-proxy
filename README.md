@@ -1,4 +1,6 @@
 puppet-modules-proxy
 ====================
 
-proxy module
+Support OS
+  * RHEL
+  * SUSE
