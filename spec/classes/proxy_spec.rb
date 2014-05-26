@@ -32,6 +32,7 @@ describe 'proxy' do
           'group'   => 'root',
           'mode'    => '644',
        })
+       }
      end
        context "params" do
          let(:params) {{
