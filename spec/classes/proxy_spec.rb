@@ -23,7 +23,7 @@ describe 'proxy' do
       end
      end
 
-   dscribe "Suse" do
+   describe "Suse" do
     let(:facts) {{ :osfamily => SuSE }}
      describe "proxy.sh on #{system}" do
        it { should contain_file('/etc/sysconfig/proxy').with({
