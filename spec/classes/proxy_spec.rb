@@ -8,10 +8,10 @@ describe 'proxy' do
      it { should contain_class('proxy') } 
      describe "proxy.sh on #{system}" do
        it { should contain_file('/etc/profile.d/proxy.sh').with({
-          'path'    => '/etc/profile.d/proxy.sh',
-          'owner'   => 'root',
-          'group'   => 'root',
-          'mode'    => '644',
+          :'path'    => '/etc/profile.d/proxy.sh',
+          :'owner'   => 'root',
+          :'group'   => 'root',
+          :'mode'    => '644',
        })
        }
      end
@@ -29,10 +29,10 @@ describe 'proxy' do
      it { should contain_class('proxy') }
      describe "proxy.sh on SuSE" do
        it { should contain_file('/etc/sysconfig/proxy').with({
-          'path'    => '/etc/sysconfig/proxy',
-          'owner'   => 'root',
-          'group'   => 'root',
-          'mode'    => '644',
+          :'path'    => '/etc/sysconfig/proxy',
+          :'owner'   => 'root',
+          :'group'   => 'root',
+          :'mode'    => '644',
        })
        }
      end
