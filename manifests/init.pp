@@ -36,33 +36,33 @@ class proxy (
     default        => $ftp_port,
   }
   $_no_proxy   = $no_proxy ? {
-    'USE_DEFAULTS' => join([ '127.0.0.1','localhost' ],", "),
-    default        => join($no_proxy,", "),
+    'USE_DEFAULTS' => join([ '127.0.0.1','localhost' ],', '),
+    default        => join($no_proxy,', '),
   }
-  
+
   case $::osfamily {
-   'RedHat', 'Debian': {
-     $proxy_path = '/etc/profile.d/proxy.sh'
-     $template   = 'proxy/common.erb'
-   }
-   'SuSe': {
-     $proxy_path = '/etc/sysconfig/proxy'
-     $template   = 'proxy/suse.erb'
-     
-     $_gopher_server = $gopher_server ? {
-       'USE_DEFAULTS' => $server,
-       default        => $gopher_server,
-     }
-     $_gopher_port   = $gopher_port ? {
-       'USE_DEFAULTS' => $port,
-       default        => $gopher_port,
-     }
-     validate_re($_gopher_server, '^http', 'The format has to start with http://')
-   } 
-   default: {
-     fail("Your $(::osfamily) currently is not supported")
+    'RedHat', 'Debian': {
+    $proxy_path = '/etc/profile.d/proxy.sh'
+    $template   = 'proxy/common.erb'
+  }
+    'SuSe': {
+    $proxy_path = '/etc/sysconfig/proxy'
+    $template   = 'proxy/suse.erb'
+
+    $_gopher_server = $gopher_server ? {
+      'USE_DEFAULTS' => $server,
+      default        => $gopher_server,
+  }
+    $_gopher_port   = $gopher_port ? {
+      'USE_DEFAULTS' => $port,
+      default        => $gopher_port,
+  }
+    validate_re($_gopher_server, '^http', 'The format has to start with http://')
+  }
+    default: {
+      fail("Your $(::osfamily) currently is not supported")
     }
-   }
+  }
 
   #validating variables
   validate_re($server, '^http', 'The format has to start with http://')
