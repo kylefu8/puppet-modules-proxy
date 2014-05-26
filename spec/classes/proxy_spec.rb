@@ -12,7 +12,8 @@ describe 'proxy' do
           'owner'   => 'root',
           'group'   => 'root',
           'mode'    => '644',
-       })
+       )}
+       }
          context "params" do
            let(:params) {{
              :server   => 'http://exaplem.com',
