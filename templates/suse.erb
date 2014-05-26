@@ -29,26 +29,26 @@ HTTP_PROXY="<%= server %>:<%= port %>"
 # the environment.  SuSEconfig can add these environment variables to
 # /etc/SuSEconfig/* (sourced by /etc/profile etc.) -
 # this setting is for https connections
-HTTPS_PROXY="<%= https_server_real %>:<%= https_port_real %>"
+HTTPS_PROXY="<%= _https_server %>:<%= _https_port %>"
 
 ## Type:        string
 ## Default:     ""
 #
 # Example: FTP_PROXY="http://proxy.provider.de:3128/"
 #
-FTP_PROXY="<%= ftp_server_real %>:<%= ftp_port_real %>"
+FTP_PROXY="<%= _ftp_server %>:<%= _ftp_port %>"
 
 ## Type:        string
 ## Default:     ""
 #
 # Example: GOPHER_PROXY="http://proxy.provider.de:3128/"
 #
-GOPHER_PROXY="<%= gopher_server_real %>:<%= gopher_port_real %>"
+GOPHER_PROXY="<%= _gopher_server %>:<%= _gopher_port %>"
 
 ## Type:        string(localhost)
 ## Default:     localhost
 #
 # Example: NO_PROXY="www.me.de, do.main, localhost"
 #
-NO_PROXY="<%= no_proxy_real %>"
+NO_PROXY="<%= _no_proxy %>"
 

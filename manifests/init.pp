@@ -1,7 +1,7 @@
 # == Class: proxy
 class proxy (
-  $server        = '',
-  $port          = '',
+  $server        = 'UNSET',
+  $port          = 'UNSET',
   $https_server  = 'USE_DEFAULTS',
   $https_port    = 'USE_DEFAULTS',
   $ftp_server    = 'USE_DEFAULTS',
@@ -19,31 +19,29 @@ class proxy (
   if empty($port) == true { fail ("port is must") }
   if is_integer($port) == false { fail( "port must be integers") }
 
-  if $https_server == 'USE_DEFAULTS' {
-    $https_server_real = $server
-  } else {
-    $https_server_real = $https_server
+  $_https_server = $https_server ? {
+    'USE_DEFAULTS' => $server,
+    default        => $https_server,
   }
-  if $https_port == 'USE_DEFAULTS' {
-    $https_port_real = $port
-  } else {
-    $https_port_real = $https_port
+  
+  $_https_port = $https_port ? {
+    'USE_DEFAULTS' => $port,
+    default        => $https_port,
   }
-  if $ftp_server == 'USE_DEFAULTS' {
-    $ftp_server_real = $server
-  } else {
-    $ftp_server_real = $ftp_server
-  }
-  if $ftp_port == 'USE_DEFAULTS' {
-    $ftp_port_real = $port
-  } else {
-    $ftp_port_real = $ftp_port
+  
+  $_ftp_server = $ftp_server ? {
+    'USE_DEFAULTS' => $server,
+    default        => $ftp_server,
   }
 
-  if $no_proxy == 'USE_DEFAULTS' {
-     $no_proxy_real = join([ '127.0.0.1','localhost' ],", ")
-  } else {
-     $no_proxy_real = join($no_proxy,", ")
+  $_ftp_port   = $ftp_port ? {
+    'USE_DEFAULTS' => $port,
+    default        => $ftp_port,
+  }
+
+  $_no_proxy   = $no_proxy ? {
+    'USE_DEFAULTS' => join([ '127.0.0.1','localhost' ],", "),
+    default        => join($no_proxy,", "),
   }
   
   case $::osfamily {
@@ -54,17 +52,17 @@ class proxy (
     'SuSe': {
        $proxy_path = '/etc/sysconfig/proxy'
        $template   = 'proxy/suse.erb'
-       if $gopher_server == 'USE_DEFAULTS' {
-         $gopher_server_real = $server
-       } else {
-         $gopher_server_real = $gopher_server
+     
+       $_gopher_server = $gopher_server ? {
+          'USE_DEFAULTS' => $server,
+          default        => $gopher_server,
        }
-       if $gopher_port == 'USE_DEFAULTS' {
-         $gopher_port_real = $port
-       } else {
-         $gopher_port_real = $gopher_port
+
+       $_gopher_port   = $gopher_port ? {
+          'USE_DEFAULTS' => $port,
+          default        => $gopher_port,
        }
-       validate_re($gopher_server_real, '^http', 'The format has to start with http://')
+       validate_re($_gopher_server, '^http', 'The format has to start with http://')
     }
     default: {
       fail("Your $(::osfamily) currently is not supported")
@@ -73,8 +71,8 @@ class proxy (
 
   #validating variables
   validate_re($server, '^http', 'The format has to start with http://')
-  validate_re($https_server_real, '^http', 'The format has to start with http://')
-  validate_re($ftp_server_real, '^http', 'The format has to start with http://')
+  validate_re($_https_server, '^http', 'The format has to start with http://')
+  validate_re($_ftp_server, '^http', 'The format has to start with http://')
 
 
 

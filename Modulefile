@@ -1,11 +1,11 @@
 name    'puppet-module-proxy'
 version '0.1.0'
-source 'UNKNOWN'
-author 'puppet'
+source 'git://github.com/for5min/puppet-modules-proxy'
+author 'Lei Tu'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary Proxy Module'
+description 'Proxy Module for Debian, CentOS, RHEL,'
+project_page 'https://github.com/for5min/puppet-modules-proxy'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/stdlib', '>= 0.1.6'
