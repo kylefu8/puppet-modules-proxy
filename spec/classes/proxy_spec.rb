@@ -7,12 +7,12 @@ describe 'proxy' do
      
      describe "proxy.sh on #{system}" do
        it { should contain_file('/etc/profile.d/proxy.sh').with({
-          'context' => 'template('proxy/common.erb')',
+          'context' =>'template('proxy/common.erb')',
           'path'    => '/etc/profile.d/proxy.sh',
           'owner'   => 'root',
           'group'   => 'root',
           'mode'    => '644',
-       )}
+       })
        }
          context "params" do
            let(:params) {{
