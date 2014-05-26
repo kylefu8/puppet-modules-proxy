@@ -8,5 +8,5 @@ rvm:
 - 1.9.3
 language: ruby
 before_script: "gem install --no-ri --no-rdoc bundler"
-script: 'bundle exec rake && bundle exec rake lint && SPEC_OPTS="--format documentation" bundle exec rake spec'
+script: 'bundle exec rake validate && bundle exec rake lint && SPEC_OPTS="--format documentation" bundle exec rake spec'
 gemfile: Gemfile
