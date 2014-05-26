@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'proxy' do
  
-  ['Debian', 'RedHat].each do |system|
+  ['Debian', 'RedHat' ].each do |system|
      let(:facts) {{ :osfamily => system }}
      
      describe "proxy.sh on #{system}" do
