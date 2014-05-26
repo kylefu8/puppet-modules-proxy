@@ -5,7 +5,7 @@ describe 'proxy' do
   ['Debian', 'RedHat' ].each do |system|
      let(:facts) {{ :osfamily => system }}
     
-     it { should contain_class('inittab') } 
+     it { should contain_class('proxy') } 
      describe "proxy.sh on #{system}" do
        it { should contain_file('/etc/profile.d/proxy.sh').with({
           'path'    => '/etc/profile.d/proxy.sh',
@@ -26,7 +26,7 @@ describe 'proxy' do
 
    describe "Suse" do
     let(:facts) {{ :osfamily => SuSE }}
-     it { should contain_class('inittab') }
+     it { should contain_class('proxy') }
      describe "proxy.sh on SuSE" do
        it { should contain_file('/etc/sysconfig/proxy').with({
           'path'    => '/etc/sysconfig/proxy',
