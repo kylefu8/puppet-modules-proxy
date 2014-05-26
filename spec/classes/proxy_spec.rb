@@ -18,7 +18,7 @@ describe 'proxy' do
        let(:params) {{
          :server   => 'http://exaplem.com',
          :port     => '8080',
-         :no_proxy => '[ '127.0.0.1', 'localhost' ]',
+         :no_proxy => '\[ \'127\.0\.0\.1\', \'localhost\' \]',
        }}
       end
      end
@@ -37,7 +37,7 @@ describe 'proxy' do
          let(:params) {{
            :server   => 'http://exaplem.com',
            :port     => '8080',
-           :no_proxy => '[ '127.0.0.1', 'localhost' ]',
+           :no_proxy => '\[ \'127\.0\.0\.1\', \'localhost\' \]',
          }}
        end
    end
