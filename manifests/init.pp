@@ -13,11 +13,10 @@ class proxy (
   $proxy_group   = 'root',
   $proxy_mode    = '644',
 ){
-
   validate_array($no_proxy)
   if empty($server) == true { fail ('server is must') }
   if empty($port) == true { fail ('port is must') }
-  if is_integer($port) == false { fail( 'port must be integers') }
+  if is_integer($port) == false { fail ('port must to be integer') }
 
   $_https_server = $https_server ? {
     'USE_DEFAULTS' => $server,
@@ -36,10 +35,10 @@ class proxy (
     default        => $ftp_port,
   }
   $_no_proxy   = $no_proxy ? {
-    'USE_DEFAULTS' => join([ '127.0.0.1','localhost' ],', '),
+    'USE_DEFAULTS' => join([ '127.0.0.1', 'localhost' ],', '),
     default        => join($no_proxy,', '),
   }
-
+  
   case $::osfamily {
     'RedHat', 'Debian': {
     $proxy_path = '/etc/profile.d/proxy.sh'
